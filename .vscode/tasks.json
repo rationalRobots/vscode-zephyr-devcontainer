@@ -1,135 +1,124 @@
 {
-	// See https://go.microsoft.com/fwlink/?LinkId=733558
-	// for the documentation about the tasks.json format
-	"version": "2.0.0",
-	"tasks": [
-		
-		// utils
-		{
-			"label": "Echo Variable",
-			"type": "shell",
-			"group": "build",
-			"command": "echo ${env:ZEPHYR_SDK_INSTALL_DIR}"
-		},
-
-		// BUILD
-		{
-			"label": "Build Zephyr sample",
-			"type": "shell",
-			"group": "build",
-			"command": "west",
-			"args": [
-				"build",
-				"${workspaceFolder}/../zephyr/samples/basic/${input:sample-proj}",
-				"-p", "${input:pristine}",
-				"-b", "${input:board}",
-			],
-			"problemMatcher": [
-				"$gcc"
-			]
-		},
-		{
-			"label": "Build LOCAL sample",
-			"type": "shell",
-			"group": "build",
-			"command": "west",
-			"args": [
-				"build",
-				"${workspaceFolder}/samples/${input:sample-proj-local}",
-				"-p", "auto",
-				"-b", "${input:board}",
-				//"-b", "${input:sample-board}",
-			],
-			"problemMatcher": [
-				"$gcc"
-			]
-		},
-
-		// FLASH
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        // utils
         {
-			"label": "Flash (force JLink)",
-			"type": "nrf-connect-flash",
-			"group": "build",
-			"runner": "jlink"
-		},
-		{
-			"label": "Flash (force OpenOCD)",
-			"type": "nrf-connect-flash",
-			"group": "build",
-			"runner": "openocd",
-		},
-        
-		// DEBUG
-		{
-			"label": "Debug sample",
-			"type": "shell",
-			"group": "build",
-			"command": "west",
-			"args": [
-				"debug",
-			],
-		},
-
-	],
-
-	// https://stackoverflow.com/questions/57977832/is-there-a-way-to-get-a-pickstring-dynamically-populated-in-a-vs-code-task
-	
-	"inputs": [
-		// TODO: make this dynamic (selected or open file)
-		{
-			"id": "sample-proj",
-			"type": "command",
-			"command": "shellCommand.execute",
-			"args": {
-				"command": "ls -1 -d [^.]*/ | cut -f1 -d'/'",
-				"cwd": "${workspaceFolder}/../zephyr/samples/basic/",
-			},
-		},
-
-		{
-			"id": "sample-proj-local",
-			"type": "command",
-			"command": "shellCommand.execute",
-			"args": {
-				"command": "ls -1 -d [^.]*/ | cut -f1 -d'/'",
-				"cwd": "${workspaceFolder}/samples/",
-			},
-		},
-
-		{
-			"id": "sample-board",
-			"type": "command",
-			"command": "shellCommand.execute",
-			"args": {
-				"command": "ls -1 -d [^.]*/ | cut -f1 -d'/'",
-				"cwd": "${workspaceFolder}/zephyr/boards/st",
-			}
-		},
-
-		{
-			"id": "board",
-			"type": "pickString",
-			"description": "See https://docs.zephyrproject.org/latest/boards/index.html",
-			"default": "nucleo_f103rb",
-			"options": [
-				"nucleo_f103rb",
-				"nucleo_g0b1re",
-				"nucleo_l452re",
-				"nucleo_l476rg",
-			]
-		},
-
-		{
-			"id": "pristine",
-			"type": "pickString",
-			"description": "Choose when to run a pristine build",
-			"default": "auto",
-			"options": [
-				"auto",
-				"always",
-				"never"
-			]
-		},
-		
-	]
-}
+            "label": "Echo Variable",
+            "type": "shell",
+            "group": "build",
+            "command": "echo ${env:ZEPHYR_SDK_INSTALL_DIR}"
+        },
+        // BUILD
+        {
+            "label": "Build",
+            "type": "shell",
+            "group": "build",
+            "command": "west",
+            "args": [
+                "build",
+                "${workspaceFolder}/app/}",
+                "-p", "${input:pristine}",
+                "-b", "nucleo_h723zg", // "${config:project.board_name}",
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Build Zephyr sample",
+            "type": "shell",
+            "group": "build",
+            "command": "west",
+            "args": [
+                "build",
+                "${workspaceFolder}/../zephyr/samples/${input:sample}",
+                "-p", "${input:pristine}",
+                "-b", "nucleo_h723zg", // "${config:project.board_name}" //"${input:board}"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "options": {
+                // "cwd": "${workspaceFolder}/../zephyr/samples"
+            },
+        },
+        // FLASH
+        {
+            "label": "Flash",
+            "type": "shell",
+            "group": "build",
+            "command": "west",
+            "args": [
+                "flash",
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        // Utils
+        {
+            "label": "Echo Sample Directory",
+            "type": "shell",
+            "command": "echo",
+            "args": [
+                "Build sample: ${workspaceFolder}/../zephyr/samples/${input:sample} For board: ${input:board}"
+            ],
+            // "presentation": {
+            //     "reveal": "never"
+            // }
+        },
+        // DEBUG
+        {
+            "label": "Debug sample",
+            "type": "shell",
+            "group": "build",
+            "command": "west",
+            "args": [
+                "debug",
+            ],
+        },
+    ],    // https://stackoverflow.com/questions/57977832/is-there-a-way-to-get-a-pickstring-dynamically-populated-in-a-vs-code-task
+    "inputs": [
+        {
+            "id": "sample",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "find ./ -name 'sample.yaml' -exec dirname {} \\;",
+                "cwd": "${workspaceFolder}/../zephyr/samples"
+            }
+        },
+        {
+            "id": "sample-board",
+            "type": "command",
+            "command": "shellCommand.execute",
+            "args": {
+                "command": "find ./ -name 'board.yml' -exec sh -c 'echo $(grep \"^  name:\" {} | cut -d\":\" -f2 | tr -d \" \")' \\;",
+                "cwd": "${workspaceFolder}/../zephyr/boards/",
+            }
+        },
+        {
+            "id": "board",
+            "type": "pickString",
+            "description": "See https://docs.zephyrproject.org/latest/boards/index.html",
+            "default": "${input:savedInput}",
+            "options": [
+                "nucleo_f103rb",
+                "nucleo_g0b1re",
+                "nucleo_l452re",
+                "nucleo_l476rg",
+            ]
+        },
+        {
+            "id": "pristine",
+            "type": "pickString",
+            "description": "Choose when to run a pristine build",
+            "options": [
+                "auto",
+                "always",
+                "never"
+            ]
+        },
+    ]}

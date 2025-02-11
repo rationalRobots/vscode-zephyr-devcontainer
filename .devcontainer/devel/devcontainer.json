@@ -21,6 +21,7 @@
     "runArgs": [
         "-v", "/dev:/dev",  //
         "--privileged"      // allows access to tty* devices
+        "--net=host"        // allows access to network devices
     ],
 
     // https://code.visualstudio.com/remote/advancedcontainers/change-default-source-mount
@@ -30,7 +31,6 @@
     // see https://code.visualstudio.com/remote/advancedcontainers/add-local-file-mount
 	// mount local folder that are external to the workspace
 	"mounts": [
-	    "source=${env:HOME}/research-zephyr/samples,target=${containerWorkspaceFolder}/samples,type=bind,consistency=cached"
     ],
 
     // make a list of ports inside the container available locally
@@ -65,6 +65,5 @@
 			    "augustocdias.tasks-shell-input" // MANDATORY for dynamic task input
             ]
         }
-    } 
-
+    }
 }

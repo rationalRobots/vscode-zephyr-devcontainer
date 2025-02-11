@@ -13,6 +13,22 @@
             "flash": false
         },
         {
+            "name": "Debug (stlink)",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/zephyr/zephyr.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "runToEntryPoint": "main",
+            "servertype": "stlink",
+            "device": "STM32H723XX", // ${config:project.mcu_name}",
+            "interface": "swd",
+            // "svdFile": "${config:project.svd_file}",
+            // "preLaunchTask": "Build",
+            "postLaunchCommands": [
+                "monitor reset halt"
+            ]
+        },
+        {
             "name": "Debug (force JLink)",
             "request": "launch",
             "type": "cortex-debug",
