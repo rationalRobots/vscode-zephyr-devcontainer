@@ -1,44 +1,11 @@
 {
 	"folders": [
-        {
-            "path": "."
-        },
-        {
-            "path": "/home/user/zephyr/",
-            "name": "zephyr"
-        },
-    ],
-
-    "settings": 
-    {
-        "project": {
-            "board_name": "nucleo_h723zg",
-            "soc_name": "STM32H723XX",
-            "mcu_name": "STM32H723XX",
-            "svd_file": "/home/user/cmsis-svd-data/data/STMicro/STM32H7x3.svd",
-            "zsdk": "0.17.0"
-        },
-
-        "files.eol": "\n",
-        "files.insertFinalNewline": true,
-        "editor.tabSize": 2,
-        "editor.insertSpaces": true,
-
-        "terminal.integrated.defaultProfile.linux": "bash",
-
-        "C_Cpp.default.compilerPath": "/opt/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc",
-        "C_Cpp.default.compileCommands": "${workspaceFolder}/build/compile_commands.json",
-
-        "cortex-debug.armToolchainPath.linux": "/opt/zephyr-sdk-0.17.0/arm-zephyr-eabi/bin/",
-        "cortex-debug.armToolchainPrefix": "arm-zephyr-eabi",
-        "cortex-debug.liveWatchRefreshRate": 250,
-        "cortex-debug.enableTelemetry": false,
-
-        "cortex-debug.JLinkGDBServerPath.linux": "/opt/SEGGER/JLink/JLinkGDBServerCLExe",
-        "cortex-debug.stm32cubeprogrammer.linux": null,
-        "cortex-debug.stlinkPath": ""
-        // stlinkPath.linux": 
-
-    },
-    
+		{
+			"path": "."
+		},
+		{
+			"path": "../zephyr"
+		}
+	],
+    "settings": {}
 }

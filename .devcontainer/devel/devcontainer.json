@@ -46,23 +46,17 @@
 				"extensions.ignoreRecommendations": true
 			},
             "extensions": [
-                // core
-				"ms-vscode.cpptools",
-				// zephyr
-				// extpack incl: devicetree, kconfig, link map, cmake
-                // NOTE: later versions are broken
-				"nordic-semiconductor.nrf-connect@2024.3.25",
+                "ms-vscode.cpptools",
+                "nordic-semiconductor.nrf-connect@2024.3.25",
                 "nordic-semiconductor.nrf-devicetree@2024.6.20",
-				"nordic-semiconductor.nrf-connect-extension-pack", 
-                // debug
-                "mcu-debug.debug-tracker-vscode", // needed by cortex-debug
+                "nordic-semiconductor.nrf-connect-extension-pack",
+                "mcu-debug.debug-tracker-vscode",
                 "marus25.cortex-debug",
                 "ms-vscode.vscode-serial-monitor",
-				// editing
                 "stkb.rewrap",
                 "wayou.vscode-todo-highlight",
-                // task utils
-			    "augustocdias.tasks-shell-input" // MANDATORY for dynamic task input
+                "augustocdias.tasks-shell-input",
+                "sourcegraph.cody-ai"
             ]
         }
     }

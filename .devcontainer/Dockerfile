@@ -60,9 +60,9 @@ RUN apt-get -y install \
     unzip
     
 # TODO: make it conditional based on TARGET
-RUN wget --post-data "accept_license_agreement=accepted" https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb && \
-	dpkg -i ./JLink_Linux_x86_64.deb && \
-	rm ./JLink_Linux_x86_64.deb
+# RUN wget --post-data "accept_license_agreement=accepted" https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb && \
+# 	dpkg -i ./JLink_Linux_x86_64.deb && \
+# 	rm ./JLink_Linux_x86_64.deb
 RUN wget --post-data "accept_license_agreement=accepted" https://www.segger.com/downloads/jlink/Ozone_Linux_x86_64.deb && \
 	dpkg -i ./Ozone_Linux_x86_64.deb && \
 	rm ./Ozone_Linux_x86_64.deb

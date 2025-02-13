@@ -35,7 +35,7 @@
                 "build",
                 "${workspaceFolder}/../zephyr/samples/${input:sample}",
                 "-p", "${input:pristine}",
-                "-b", "nucleo_h723zg", // "${config:project.board_name}" //"${input:board}"
+                "-b", "nucleo_g491re", // nucleo_h723zg", // "${config:project.board_name}" //"${input:board}"
             ],
             "problemMatcher": [
                 "$gcc"
