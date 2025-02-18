@@ -20,7 +20,7 @@
     // The optional 'runArgs' property can be used to specify additional runtime arguments.
     "runArgs": [
         "-v", "/dev:/dev",  //
-        "--privileged"      // allows access to tty* devices
+        "--privileged",      // allows access to tty* devices
         "--net=host"        // allows access to network devices
     ],
 
@@ -31,8 +31,10 @@
     // see https://code.visualstudio.com/remote/advancedcontainers/add-local-file-mount
 	// mount local folder that are external to the workspace
 	"mounts": [
+        "source=${localEnv:HOME}/.bashrc,target=/home/user/.bashrc,type=bind",
+        "source=${localEnv:HOME}/.bash_aliases,target=/home/user/.bash_aliases,type=bind"
     ],
-
+    
     // make a list of ports inside the container available locally
 	"forwardPorts": [
 	],

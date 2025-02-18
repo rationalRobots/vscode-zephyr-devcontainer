@@ -18,7 +18,7 @@
             "command": "west",
             "args": [
                 "build",
-                "${workspaceFolder}/app/}",
+                "${workspaceFolder}/source/}",
                 "-p", "${input:pristine}",
                 "-b", "nucleo_h723zg", // "${config:project.board_name}",
             ],
